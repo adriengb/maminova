@@ -1,0 +1,4 @@
+scrapy==1.5.0
+numpy
+fuzzywuzzy=0.16.0
+cv2=3.3.0

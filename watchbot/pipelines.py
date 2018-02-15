@@ -12,14 +12,14 @@ class MyPipeline(ImagesPipeline):
     def __init__(self, store_uri, download_func=None, settings=None):
         super(MyPipeline, self).__init__(store_uri, settings=settings,
                                              download_func=download_func)
-        self.file = open("data.csv", 'wb')
+        self.file = open("data/raw_labels.csv", 'wb')
         self.exporter = CsvItemExporter(self.file)
         self.exporter.start_exporting()
 
     def file_path(self, request, response=None, info=None):
         #item=request.meta['item'] # Like this you can use all from item, not just url.
         image_guid = request.url.split('/')[-1]
-        return 'full/%s' % (image_guid)
+        return image_guid
 
 
 

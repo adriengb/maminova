@@ -28,7 +28,7 @@ class CDASpider(scrapy.Spider):
 
     def parse_watch(self, response):
         # grab the URL of the cover image
-        banned_words = ['bracelet', 'boucle', 'boite', 'catalogue', 'nato', 'lot', 'livre', 'insert', 'écrin', 'lunette']
+        banned_words = ['bracelet', 'boucle', 'boite', 'catalogue', 'nato', 'lot', 'livre', 'insert', 'écrin', 'lunette', 'remontoir', 'watchwinder']
         title = response.xpath("//h2[@class='postingheadline']/text()").extract()[0].lower()
         date = response.xpath("//p[@class='author']/text()").extract()[1].split(',')[-2]
         if '[vends]' in title and not any(banned_word in title for banned_word in banned_words):

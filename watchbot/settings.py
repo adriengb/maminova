@@ -68,7 +68,7 @@ ITEM_PIPELINES = {
     'watchbot.pipelines.MyPipeline': 1
     #'scrapy.pipelines.images.ImagesPipeline': 1
 }
-IMAGES_STORE = "/Users/axa/Documents/GitHub/maminova/output"
+IMAGES_STORE = "data/raw/"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
