@@ -4,3 +4,6 @@
 *.gif
 *.png
 *.pyc
+*.xml
+*.DS_Store
+*.iml
