@@ -1,5 +1,4 @@
 import scrapy
-import re
 from watchbot.items import WatchPicture
 
 
@@ -19,9 +18,9 @@ class C24pider(scrapy.Spider):
 
     def parse_watch(self, response):
         # grab the URL of the cover image
-        title = response.xpath("//h1[@class='h3 m-t-0']/text()").extract()[0].lower()
-        price = response.xpath("//tr[td[1]/strong/text()='Prix']/td[2]/text()").extract()
+        #title = response.xpath("//h1[@class='h3 m-t-0']/text()").extract()[0].lower()
+        #price = response.xpath("//tr[td[1]/strong/text()='Prix']/td[2]/text()").extract()
         print('PRICE')
-        print(price)
+        #print(price)
         yield WatchPicture(title=title, price=price)
 

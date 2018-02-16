@@ -52,9 +52,11 @@ COOKIES_ENABLED = False
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'quotesbot.middlewares.MyCustomDownloaderMiddleware': 543,
-#}
+HTTP_PROXY = 'http://127.0.0.1:8123'
+DOWNLOADER_MIDDLEWARES = {
+  #Tor Middleware
+  'tor.middlewares.ProxyMiddleware': 400
+}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html

@@ -22,7 +22,6 @@ class MyPipeline(ImagesPipeline):
         return image_guid
 
 
-
     def close_spider(self, spider):
         super(ImagesPipeline, self).close_spider(spider)
         self.exporter.finish_exporting()

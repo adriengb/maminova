@@ -6,6 +6,7 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from scrapy.conf import settings
 
 
 class WatchbotSpiderMiddleware(object):
@@ -78,6 +79,7 @@ class WatchbotDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
+        request.meta['proxy'] = settings.['HTTP_PROXY']
         return None
 
     def process_response(self, request, response, spider):
