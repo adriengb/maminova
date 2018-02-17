@@ -4,9 +4,20 @@
 #
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-
+import random
 from scrapy import signals
 from scrapy.conf import settings
+
+class RandomUserAgentMiddleware(object):
+    def process_request(self, request, spider):
+        ua  = random.choice(settings.get('USER_AGENT_LIST'))
+        if ua:
+            request.headers.setdefault('User-Agent', ua)
+
+class ProxyMiddleware(object):
+    #Overide the request process by making it go through Tor
+    def process_request(self, request, spider):
+        request.meta['proxy'] = settings['HTTP_PROXY']
 
 
 class WatchbotSpiderMiddleware(object):
@@ -56,7 +67,6 @@ class WatchbotSpiderMiddleware(object):
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
 
-
 class WatchbotDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
@@ -79,7 +89,6 @@ class WatchbotDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
-        request.meta['proxy'] = settings.['HTTP_PROXY']
         return None
 
     def process_response(self, request, response, spider):

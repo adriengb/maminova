@@ -23,7 +23,7 @@ class MyPipeline(ImagesPipeline):
 
 
     def close_spider(self, spider):
-        super(ImagesPipeline, self).close_spider(spider)
+        #super(ImagesPipeline, self).close_spider(spider)
         self.exporter.finish_exporting()
         self.file.close()
 
