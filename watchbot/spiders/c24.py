@@ -5,7 +5,7 @@ class C24pider(scrapy.Spider):
     name = "c24"
     brands = ['rolex', 'omega', 'jaeger', 'iwc', 'patek', 'panerai', 'seiko', 'cartier', 'hublot', 'breitling', 'zenith', 'tagheuer', 'tudor',
               'audemarspiguet', 'breguet', 'blancpain', 'chanel', 'alangesoehne']
-    start_urls = ['https://www.chrono24.com/{}/index-1.htm?sortorder=5'.format(brand) for brand in brands]
+    start_urls = ['https://www.chrono24.com/patekphilippe/index-1.htm?sortorder=5']
     count = 1
 
     def parse(self, response):
@@ -15,7 +15,7 @@ class C24pider(scrapy.Spider):
             for div in response.xpath("//div[@class='article-list block']/div[@class='article-item-container']"):
                 yield scrapy.Request("https://www.chrono24.com/{}".format(div.xpath("./a/@href").extract()[0]), self.parse_watch)
             self.count += 1
-            next = 'https://www.chrono24.com/rolex/index-{}.htm?sortorder=5'.format(self.count)
+            next = 'https://www.chrono24.com/patekphilippe/index-{}.htm?sortorder=5'.format(self.count)
             yield scrapy.Request(next, self.parse)
 
     def parse_watch(self, response):
