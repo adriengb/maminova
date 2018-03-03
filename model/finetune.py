@@ -67,7 +67,7 @@ def setup_to_finetune(model):
      layer.trainable = False
   for layer in model.layers[NB_IV3_LAYERS_TO_FREEZE:]:
      layer.trainable = True
-  model.compile(optimizer=SGD(lr=0.0001, momentum=0.9), loss='categorical_crossentropy', metrics=['accuracy'])
+  model.compile(optimizer=SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True), loss='categorical_crossentropy', metrics=['accuracy'])
 
 
 def train(args):
@@ -119,10 +119,9 @@ def train(args):
 
   history_tl = model.fit_generator(
     train_generator,
-    nb_epoch=nb_epoch,
+    epochs=nb_epoch,
     samples_per_epoch=nb_train_samples,
     validation_data=validation_generator,
-    nb_val_samples=nb_val_samples,
     class_weight='auto')
 
   # fine-tuning
@@ -131,9 +130,8 @@ def train(args):
   history_ft = model.fit_generator(
     train_generator,
     samples_per_epoch=nb_train_samples,
-    nb_epoch=nb_epoch,
+    epochs=nb_epoch,
     validation_data=validation_generator,
-    nb_val_samples=nb_val_samples,
     class_weight='auto')
 
   model.save(args.output_model_file)
